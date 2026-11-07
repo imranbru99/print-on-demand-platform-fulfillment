@@ -1,0 +1,120 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-display: 'Fraunces', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+    --font-sans: 'Outfit', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-ink: #0b1428;
+    --color-ink-muted: #1e2d4a;
+    --color-teal: #18d4c8;
+    --color-teal-dim: #0fa89f;
+    --color-sand: #f2e6d3;
+    --color-sand-dim: #d9c9b0;
+    --color-mist: #e8eef7;
+}
+
+@layer base {
+    html {
+        @apply antialiased scroll-smooth;
+    }
+
+    body {
+        @apply bg-mist text-ink font-sans dark:bg-ink dark:text-sand;
+    }
+
+    h1,
+    h2,
+    h3,
+    .font-display {
+        font-family: var(--font-display);
+    }
+}
+
+@layer components {
+    .pod-gradient-hero {
+        background:
+            radial-gradient(ellipse 80% 60% at 70% 0%, color-mix(in oklab, var(--color-teal) 35%, transparent), transparent 55%),
+            radial-gradient(ellipse 60% 50% at 10% 20%, color-mix(in oklab, var(--color-sand) 45%, transparent), transparent 50%),
+            linear-gradient(165deg, var(--color-ink) 0%, #142544 45%, #0d1a32 100%);
+    }
+
+    .pod-grid-pattern {
+        background-image:
+            linear-gradient(color-mix(in oklab, var(--color-teal) 12%, transparent) 1px, transparent 1px),
+            linear-gradient(90deg, color-mix(in oklab, var(--color-teal) 12%, transparent) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    }
+
+    .btn-primary {
+        @apply inline-flex items-center justify-center rounded-full px-6 py-2.5 text-sm font-semibold
+            bg-teal text-ink shadow-lg shadow-teal/30 transition duration-300
+            hover:-translate-y-0.5 hover:bg-teal-dim hover:shadow-teal/40
+            focus:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2
+            dark:focus-visible:ring-offset-ink;
+    }
+
+    .btn-ghost {
+        @apply inline-flex items-center justify-center rounded-full border border-ink/15 px-6 py-2.5 text-sm font-medium
+            text-ink transition duration-300 hover:border-teal hover:text-teal-dim
+            dark:border-sand/25 dark:text-sand dark:hover:border-teal dark:hover:text-teal;
+    }
+
+    .surface-card {
+        @apply rounded-2xl border border-ink/10 bg-white/80 p-6 backdrop-blur-sm
+            dark:border-sand/10 dark:bg-ink-muted/60;
+    }
+}
+
+@layer utilities {
+    .animate-float {
+        animation: pod-float 6s ease-in-out infinite;
+    }
+
+    .animate-glow-pulse {
+        animation: pod-glow 4s ease-in-out infinite;
+    }
+
+    .animate-fade-up {
+        animation: pod-fade-up 0.8s ease-out both;
+    }
+}
+
+@keyframes pod-float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes pod-glow {
+    0%,
+    100% {
+        opacity: 0.55;
+        filter: blur(40px);
+    }
+    50% {
+        opacity: 0.9;
+        filter: blur(52px);
+    }
+}
+
+@keyframes pod-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
